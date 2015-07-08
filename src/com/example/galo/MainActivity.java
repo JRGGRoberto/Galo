@@ -115,7 +115,7 @@ public class MainActivity extends Activity {
 		
 		
 		final Toast toastFimJogo = Toast.makeText(getApplicationContext(),"O jogo terminou num empate", Toast.LENGTH_SHORT);
-		toastFimJogo.setGravity(Gravity.TOP, 50, 250);
+		toastFimJogo.setGravity(Gravity.TOP, Gravity.CENTER_HORIZONTAL, 250);
 		
 				/**
 		 * Botão inicio de Joggo "Começar"
@@ -155,7 +155,7 @@ public class MainActivity extends Activity {
 
 							if (jogoAcabado()) {
 								final Toast toastWin = Toast.makeText(getApplicationContext(),  " Ganhou o jogador com o simbolo "+ simbolocorrente,Toast.LENGTH_LONG);
-								toastWin.setGravity(Gravity.TOP, 50, 250);
+								toastWin.setGravity(Gravity.TOP, Gravity.CENTER_HORIZONTAL, 250);
 								toastWin.show();
 							}else if (jogadas > 8) {
 								toastFimJogo.show();
@@ -205,8 +205,8 @@ public class MainActivity extends Activity {
 	
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
-		jogosalvo = savedInstanceState.getCharArray("jogosalvo");
-		simbolocorrente = savedInstanceState.getChar("simbolocorrente");
+//		jogosalvo = savedInstanceState.getCharArray("jogosalvo");
+//		simbolocorrente = savedInstanceState.getChar("simbolocorrente");
 	}
 	
 }
