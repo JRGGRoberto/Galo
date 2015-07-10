@@ -1,6 +1,7 @@
- package com.example.galo;
+package com.example.galo;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -17,7 +18,7 @@ public class MainActivity extends Activity {
 	boolean jogoterminado = false;
 	static int jogadas = -1;
 	static int mVitoria;
-	char[] jogosalvo = new char [9];
+	char[] jogosalvo = new char[9];
 
 	public static void inicializacaoTabuleiro() {
 		quadrado = new char[3][3];
@@ -104,23 +105,18 @@ public class MainActivity extends Activity {
 		btns[2][1] = (ImageView) findViewById(R.id.b32);
 		btns[2][2] = (ImageView) findViewById(R.id.b33);
 
-		// ImageView cardinal = (ImageView) findViewById(R.id.grelha);
+		final String whowin = getResources().getString(R.string.whowin);
+		final String draw = getResources().getString(R.string.draw);
 
-		/*Linhas que marcam a vitória
-		final ImageView vitoriad = (ImageView) findViewById(R.id.vitodiag);
-		final ImageView vitoriv1  = (ImageView) findViewById(R.id.vitodiagv1);
-		final ImageView vitoriv2  = (ImageView) findViewById(R.id.vitodiagv2);
-		final ImageView vitoriv3  = (ImageView) findViewById(R.id.vitodiagv3);*/
-		
-		
-		
-		final Toast toastFimJogo = Toast.makeText(getApplicationContext(),"O jogo terminou num empate", Toast.LENGTH_SHORT);
-		toastFimJogo.setGravity(Gravity.TOP, Gravity.CENTER_HORIZONTAL, 250);
-		
-				/**
+		final Toast toastFimJogo = Toast.makeText(getApplicationContext(),
+				draw, Toast.LENGTH_SHORT);
+		toastFimJogo.setGravity(Gravity.TOP, Gravity.CENTER_HORIZONTAL, 500);
+
+		/**
 		 * Botão inicio de Joggo "Começar"
 		 */
 		final ImageView binicio = (ImageView) findViewById(R.id.bcomecar);
+
 		binicio.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -154,14 +150,18 @@ public class MainActivity extends Activity {
 							}
 
 							if (jogoAcabado()) {
-								final Toast toastWin = Toast.makeText(getApplicationContext(),  " Ganhou o jogador com o simbolo "+ simbolocorrente,Toast.LENGTH_LONG);
-								toastWin.setGravity(Gravity.TOP, Gravity.CENTER_HORIZONTAL, 250);
+								final Toast toastWin = Toast.makeText(
+										getApplicationContext(), whowin + " "
+												+ simbolocorrente,
+										Toast.LENGTH_LONG);
+								toastWin.setGravity(Gravity.TOP,
+										Gravity.CENTER_HORIZONTAL, 500);
 								toastWin.show();
-							}else if (jogadas > 8) {
+							} else if (jogadas > 8) {
 								toastFimJogo.show();
 							}
 						} else {
-							//toastjogInvalida.show();
+							// toastjogInvalida.show();
 						}
 					}
 				});
@@ -182,19 +182,28 @@ public class MainActivity extends Activity {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		/*
+		 * int id = item.getItemId(); if (id == R.id.menu_regras) { return true;
+		 * }
+		 */
+		switch (item.getItemId()) {
+		case R.id.menu_regras:
+			Intent intent = new Intent();
+			intent.setClass(MainActivity.this, RegrasActivity.class);
+			startActivity(intent);
 			return true;
+		default:
+			return super.onOptionsItemSelected(item);
 		}
-		return super.onOptionsItemSelected(item);
+
 	}
-	
+
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		int r = 0;
-		for(int i=0; i< 3; i++){
-			for(int j=0; j< 3; j++){
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
 				jogosalvo[r] = quadrado[i][j];
 				r++;
 			}
@@ -202,11 +211,11 @@ public class MainActivity extends Activity {
 		outState.putCharArray("jogsalvo", jogosalvo);
 		outState.putChar("simbolocorrente", simbolocorrente);
 	}
-	
+
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
-//		jogosalvo = savedInstanceState.getCharArray("jogosalvo");
-//		simbolocorrente = savedInstanceState.getChar("simbolocorrente");
+		// jogosalvo = savedInstanceState.getCharArray("jogosalvo");
+		// simbolocorrente = savedInstanceState.getChar("simbolocorrente");
 	}
-	
+
 }
