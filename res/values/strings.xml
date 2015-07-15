@@ -9,5 +9,10 @@
     <string name="title_activity_regras">RegrasActivity</string>
 	<string name="menu_regras">Rules</string>
 	<string name="thelp">Each player has an associated symbol O or X. They play alternately and wins the player who makes three consecutive symbols or in diagonal, vertical or horizontal.</string>
+	<string name="play1">Player 1</string>
+	<string name="play2">Player 2</string>
+	<string name="simbinicial">Start symbol</string>
+	<string name="vezdo">Turn of </string>
+	
 	
 </resources>

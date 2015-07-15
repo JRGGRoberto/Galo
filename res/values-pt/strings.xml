@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Galo</string>
+    <string name="app_name">Jogo da Velha</string>
     <string name="hello_world">Olá Mundo</string>
     <string name="action_settings">Configurações</string>
     <string name="whowin">Ganhou o jogador com o símbolo</string>
     <string name="draw">O jogo terminou num empate</string>
     <string name="menu_regras">Regras</string>
     <string name="thelp">Cada jogador tem um simbolo associado O ou X. Jogam alternadamente e ganha o jogador que fizer três símbolos seguidos quer na diagonal, vertical ou horizontal.</string>
-
+	<string name="play1">Jogador 1</string>
+	<string name="play2">Jogador 2</string>
+	<string name="simbinicial">Símbolo de início</string>
+	<string name="vezdo">Vez do </string>
 </resources>
