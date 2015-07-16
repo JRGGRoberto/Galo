@@ -13,60 +13,54 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-	static char[] tab;
+	static char[] tab = new char[9];
 	static char simbolocorrente = 'X';
 	boolean jogoterminado = false;
 	static int jogadas = -1;
 	static int TAMANHO = 3;
 	static int win = 0;
-	
-	final ImageView[] btns =  {
-			(ImageView) findViewById(R.id.b11),
-			(ImageView) findViewById(R.id.b12),
-			(ImageView) findViewById(R.id.b13),
-			(ImageView) findViewById(R.id.b21),
-			(ImageView) findViewById(R.id.b22),
-			(ImageView) findViewById(R.id.b23),
-			(ImageView) findViewById(R.id.b31),
-			(ImageView) findViewById(R.id.b32),
-			(ImageView) findViewById(R.id.b33)
-		};
 
+	/*
+	 * final ImageView[] btns = { (ImageView) findViewById(R.id.b11),
+	 * (ImageView) findViewById(R.id.b12), (ImageView) findViewById(R.id.b13),
+	 * (ImageView) findViewById(R.id.b21), (ImageView) findViewById(R.id.b22),
+	 * (ImageView) findViewById(R.id.b23), (ImageView) findViewById(R.id.b31),
+	 * (ImageView) findViewById(R.id.b32), (ImageView) findViewById(R.id.b33) };
+	 */
 	public static void inicializacaoTabuleiro() {
 		jogadas = 0;
-		tab = new char[TAMANHO * TAMANHO];
 		for (int pos = 0; pos < tab.length; pos++) {
-				tab[pos] = ' ';
+			tab[pos] = ' ';
 		}
 	}
 
 	public static boolean jogoAcabado() {
 		int inicio = 0;
-		int fim =0;
-		int intervalo = 0; 
-		
-		for(int j=0; j<(TAMANHO * 2 + 2); j++){
-			if(j<TAMANHO){
+		int fim = 0;
+		int intervalo = 0;
+
+		for (int j = 0; j < (TAMANHO * 2 + 2); j++) {
+			if (j < TAMANHO) {
 				inicio = j * TAMANHO;
 				intervalo = +1;
-			} else if(j<TAMANHO*2){
+			} else if (j < TAMANHO * 2) {
 				inicio = j - TAMANHO;
 				intervalo = TAMANHO;
-			} else if(j==TAMANHO*2){
+			} else if (j == TAMANHO * 2) {
 				inicio = 0;
 				intervalo = TAMANHO + 1;
 			} else {
-				inicio = TAMANHO -1;
+				inicio = TAMANHO - 1;
 				intervalo = TAMANHO - 1;
 			}
-			fim = inicio + TAMANHO -1;
+			fim = inicio + TAMANHO - 1;
 
 			int ok = 0;
 
 			if (tab[inicio] != ' ') {
 				win++;
-				
-				for (int i = inicio; i < fim; i++) {	
+
+				for (int i = inicio; i < fim; i++) {
 					if (tab[inicio] != tab[inicio + intervalo]) {
 						break;
 					} else {
@@ -85,16 +79,19 @@ public class MainActivity extends Activity {
 	}
 
 	public static boolean fazerJogada(int x) {
-		if (jogadas == -1) {
-			return false;
+		if (!jogoAcabado()) {
+			if (jogadas == -1) {
+				return false;
+			}
+			if (tab[x] != ' ') { // posicao ja preenchida
+				return false;
+			}
+			tab[x] = simbolocorrente; // guardar a jogada que foi feita
+			troca();
+			jogadas++;
+			return true; // devolver sucesso
 		}
-		if (tab[x] != ' ') { // posicao ja preenchida
-			return false;
-		}
-		tab[x] = simbolocorrente; // guardar a jogada que foi feita
-		troca();
-		jogadas++;
-		return true; // devolver sucesso
+		return false;
 	}
 
 	public static void troca() {
@@ -109,23 +106,22 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		/*final ImageView[] btns =  {
-			(ImageView) findViewById(R.id.b11),
-			(ImageView) findViewById(R.id.b12),
-			(ImageView) findViewById(R.id.b13),
-			(ImageView) findViewById(R.id.b21),
-			(ImageView) findViewById(R.id.b22),
-			(ImageView) findViewById(R.id.b23),
-			(ImageView) findViewById(R.id.b31),
-			(ImageView) findViewById(R.id.b32),
-			(ImageView) findViewById(R.id.b33)
-		};*/
+
+		final ImageView[] btns = { (ImageView) findViewById(R.id.b11),
+				(ImageView) findViewById(R.id.b12),
+				(ImageView) findViewById(R.id.b13),
+				(ImageView) findViewById(R.id.b21),
+				(ImageView) findViewById(R.id.b22),
+				(ImageView) findViewById(R.id.b23),
+				(ImageView) findViewById(R.id.b31),
+				(ImageView) findViewById(R.id.b32),
+				(ImageView) findViewById(R.id.b33) };
 
 		final String whowin = getResources().getString(R.string.whowin);
 		final String draw = getResources().getString(R.string.draw);
 
-		final Toast toastFimJogo = Toast.makeText(getApplicationContext(),draw, Toast.LENGTH_SHORT);
+		final Toast toastFimJogo = Toast.makeText(getApplicationContext(),
+				draw, Toast.LENGTH_SHORT);
 		toastFimJogo.setGravity(Gravity.TOP, Gravity.CENTER_HORIZONTAL, 500);
 
 		/**
@@ -136,9 +132,7 @@ public class MainActivity extends Activity {
 		binicio.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// binicio.setImageAlpha(50);
 				inicializacaoTabuleiro();
-				
 				for (int i = 0; i < tab.length; i++) {
 					final int j = i;
 					btns[j].setImageResource(R.drawable.vazio);
@@ -147,7 +141,7 @@ public class MainActivity extends Activity {
 		});
 
 		/**
-		 * Botões X 0
+		 * Captura jogadas
 		 */
 		for (int i = 0; i < tab.length; i++) {
 			final int j = i;
@@ -160,10 +154,14 @@ public class MainActivity extends Activity {
 						} else if (simbolocorrente == 'O') {
 							btns[j].setImageResource(R.drawable.bola);
 						}
-	
+
 						if (jogoAcabado()) {
-							final Toast toastWin = Toast.makeText(getApplicationContext(), whowin + " " + simbolocorrente, Toast.LENGTH_LONG);
-							toastWin.setGravity(Gravity.TOP, Gravity.CENTER_HORIZONTAL, 500);
+							final Toast toastWin = Toast.makeText(
+									getApplicationContext(), whowin + " "
+											+ simbolocorrente,
+									Toast.LENGTH_LONG);
+							toastWin.setGravity(Gravity.TOP,
+									Gravity.CENTER_HORIZONTAL, 500);
 							toastWin.show();
 						} else if (jogadas > 8) {
 							toastFimJogo.show();
@@ -189,13 +187,23 @@ public class MainActivity extends Activity {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-
+		Intent intent = new Intent();
 		switch (item.getItemId()) {
 		case R.id.menu_regras:
-			Intent intent = new Intent();
 			intent.setClass(MainActivity.this, RegrasActivity.class);
 			startActivity(intent);
 			return true;
+			
+		case R.id.menu_regras1:
+				intent.setClass(MainActivity.this, RegrasActivity.class);
+				startActivity(intent);
+				return true;
+
+		case R.id.action_settings:
+			intent.setClass(MainActivity.this, SettingsActivity.class);
+			startActivity(intent);
+			return true;
+
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -205,7 +213,6 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		int r = 0;
 		outState.putCharArray("jogsalvo", tab);
 		outState.putChar("simbolocorrente", simbolocorrente);
 	}
@@ -213,22 +220,23 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 		tab = savedInstanceState.getCharArray("jogosalvo");
-		for(int i=0; i< tab.length; i++){
-			switch(tab[i]){
-				case 'X': btns[i].setImageResource(R.drawable.cruz);
-					break;
-				case 'O': btns[i].setImageResource(R.drawable.bola);
-					break;
+		final ImageView[] btnsalvo = new ImageView[9];
+		for (int i = 0; i < tab.length; i++) {
+			switch (tab[i]) {
+			case 'X':
+				btnsalvo[i].setImageResource(R.drawable.cruz);
+				break;
+			case 'O':
+				btnsalvo[i].setImageResource(R.drawable.bola);
+				break;
 			}
 		}
 		simbolocorrente = savedInstanceState.getChar("simbolocorrente");
 		String turnof = getResources().getString(R.string.vezdo);
-		final Toast toastWin = Toast.makeText(getApplicationContext(), turnof + simbolocorrente, Toast.LENGTH_LONG);
+		final Toast toastWin = Toast.makeText(getApplicationContext(), turnof
+				+ simbolocorrente, Toast.LENGTH_LONG);
 		toastWin.setGravity(Gravity.TOP, Gravity.CENTER_HORIZONTAL, 500);
 		toastWin.show();
-		
-		
-		
 	}
 
 }

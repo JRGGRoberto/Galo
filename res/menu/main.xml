@@ -8,5 +8,23 @@
         android:showAsAction="always"
         android:icon="@drawable/ic_action_view_as_list"
         android:title="@string/menu_regras"/>
+    
+    
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/ic_action_view_as_list"
+        android:title="@string/action_settings"/>
+    
+    <item
+        android:id="@+id/menu_regras1"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/ic_action_view_as_list"
+        android:title="@string/menu_regras"/>
+    
+  
+    
 
 </menu>

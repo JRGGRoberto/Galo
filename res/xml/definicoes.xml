@@ -3,8 +3,21 @@
     
     <ListPreference 
         android:key="simbinicial"
-        android:title="@string/simbinicial"/>
+        android:title="@string/simbinicial"
+        android:entries="@array/array_simb"
+        android:entryValues="@array/array_simbv"/>
     
+    <EditTextPreference 
+        android:key="play1"
+        android:title="@string/play1"
+        android:summary="alterar isto" 
+        android:defaultValue="Roberto"/>
+    
+    <EditTextPreference 
+        android:key="play2"
+        android:title="@string/play2"
+        android:summary="alterar isto" 
+        android:defaultValue="Góes"/>
     
 
 </PreferenceScreen>

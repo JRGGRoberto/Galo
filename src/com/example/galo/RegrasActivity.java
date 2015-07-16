@@ -21,14 +21,14 @@ public class RegrasActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				finish();
-			
-			/*
-				Intent intent = new Intent();
-				intent.setClass(RegrasActivity.this, MainActivity.class);
-				
-				startActivity(intent);
-			*/
-				
+
+				/*
+				 * Intent intent = new Intent();
+				 * intent.setClass(RegrasActivity.this, MainActivity.class);
+				 * 
+				 * startActivity(intent);
+				 */
+
 			}
 
 		});
