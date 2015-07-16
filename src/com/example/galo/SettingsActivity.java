@@ -5,8 +5,9 @@ import android.preference.PreferenceActivity;
 
 public class SettingsActivity extends PreferenceActivity {
 
-	protected void OnCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	// @Override
+	protected void OnCreate(Bundle saveInstanceState) {
+		super.onCreate(saveInstanceState);
 		addPreferencesFromResource(R.xml.definicoes);
 	}
 

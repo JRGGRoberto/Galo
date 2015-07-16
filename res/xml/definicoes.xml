@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-    
-    <ListPreference 
-        android:key="simbinicial"
-        android:title="@string/simbinicial"
-        android:entries="@array/array_simb"
-        android:entryValues="@array/array_simbv"/>
-    
-    <EditTextPreference 
-        android:key="play1"
-        android:title="@string/play1"
-        android:summary="alterar isto" 
-        android:defaultValue="Roberto"/>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:title="Tretas">
+
+    <CheckBoxPreference 
+        android:key="mostrar_img"
+        android:title="Mostrar Imagem"
+        android:summary="Mostar a imagem no ecrã principal a seguir a indicação do número de cliques"/>
     
     <EditTextPreference 
-        android:key="play2"
-        android:title="@string/play2"
-        android:summary="alterar isto" 
-        android:defaultValue="Góes"/>
+        android:key="saudacao"
+        android:title="Saudação"
+        android:summary="Saudação apresentada no ecrã de entrada"
+        android:defaultValue="Bem vindo!"/>
     
+    
+    <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" 
+        android:title="Opção com sub opções"
+        android:key="subopcoes"
+        android:summary="Muitas mais subopções dentro desta opção">
+
+	    <CheckBoxPreference 
+	        android:key="opc1"
+	        android:title="Opção 1"
+	        android:summary="Desc opção 1"/>
+	    
+	    <CheckBoxPreference 
+	        android:key="opc2"
+	        android:title="Opção 2"
+	        android:summary="Desc opção 2"/>
+	
+	</PreferenceScreen>
 
 </PreferenceScreen>

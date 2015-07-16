@@ -20,13 +20,6 @@ public class MainActivity extends Activity {
 	static int TAMANHO = 3;
 	static int win = 0;
 
-	/*
-	 * final ImageView[] btns = { (ImageView) findViewById(R.id.b11),
-	 * (ImageView) findViewById(R.id.b12), (ImageView) findViewById(R.id.b13),
-	 * (ImageView) findViewById(R.id.b21), (ImageView) findViewById(R.id.b22),
-	 * (ImageView) findViewById(R.id.b23), (ImageView) findViewById(R.id.b31),
-	 * (ImageView) findViewById(R.id.b32), (ImageView) findViewById(R.id.b33) };
-	 */
 	public static void inicializacaoTabuleiro() {
 		jogadas = 0;
 		for (int pos = 0; pos < tab.length; pos++) {
@@ -120,8 +113,7 @@ public class MainActivity extends Activity {
 		final String whowin = getResources().getString(R.string.whowin);
 		final String draw = getResources().getString(R.string.draw);
 
-		final Toast toastFimJogo = Toast.makeText(getApplicationContext(),
-				draw, Toast.LENGTH_SHORT);
+		final Toast toastFimJogo = Toast.makeText(getApplicationContext(),draw, Toast.LENGTH_SHORT);
 		toastFimJogo.setGravity(Gravity.TOP, Gravity.CENTER_HORIZONTAL, 500);
 
 		/**
@@ -140,6 +132,7 @@ public class MainActivity extends Activity {
 			}
 		});
 
+		
 		/**
 		 * Captura jogadas
 		 */
@@ -157,11 +150,8 @@ public class MainActivity extends Activity {
 
 						if (jogoAcabado()) {
 							final Toast toastWin = Toast.makeText(
-									getApplicationContext(), whowin + " "
-											+ simbolocorrente,
-									Toast.LENGTH_LONG);
-							toastWin.setGravity(Gravity.TOP,
-									Gravity.CENTER_HORIZONTAL, 500);
+									getApplicationContext(), whowin + " " + simbolocorrente,Toast.LENGTH_LONG);
+							toastWin.setGravity(Gravity.TOP,Gravity.CENTER_HORIZONTAL, 500);
 							toastWin.show();
 						} else if (jogadas > 8) {
 							toastFimJogo.show();
@@ -193,11 +183,11 @@ public class MainActivity extends Activity {
 			intent.setClass(MainActivity.this, RegrasActivity.class);
 			startActivity(intent);
 			return true;
-			
+
 		case R.id.menu_regras1:
-				intent.setClass(MainActivity.this, RegrasActivity.class);
-				startActivity(intent);
-				return true;
+			intent.setClass(MainActivity.this, RegrasActivity.class);
+			startActivity(intent);
+			return true;
 
 		case R.id.action_settings:
 			intent.setClass(MainActivity.this, SettingsActivity.class);
@@ -233,8 +223,7 @@ public class MainActivity extends Activity {
 		}
 		simbolocorrente = savedInstanceState.getChar("simbolocorrente");
 		String turnof = getResources().getString(R.string.vezdo);
-		final Toast toastWin = Toast.makeText(getApplicationContext(), turnof
-				+ simbolocorrente, Toast.LENGTH_LONG);
+		final Toast toastWin = Toast.makeText(getApplicationContext(), turnof+ simbolocorrente, Toast.LENGTH_LONG);
 		toastWin.setGravity(Gravity.TOP, Gravity.CENTER_HORIZONTAL, 500);
 		toastWin.show();
 	}

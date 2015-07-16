@@ -27,9 +27,7 @@
             android:name=".RegrasActivity"
             android:label="@string/title_activity_regras" >
         </activity>
-        <activity 
-            android:name="SettingsActivity"
-            android:label="Definições"></activity>
+        <activity android:name=".SettingsActivity"></activity>
     </application>
 
 </manifest>
