@@ -10,6 +10,9 @@
     <string name="thelp">Cada jogador tem um simbolo associado O ou X. Jogam alternadamente e ganha o jogador que fizer três símbolos seguidos quer na diagonal, vertical ou horizontal.</string>
 	<string name="play1">Jogador 1</string>
 	<string name="play2">Jogador 2</string>
+	<string name="simbx">Simbolo X</string>
+	<string name="simbo">Simbolo O</string>
 	<string name="simbinicial">Símbolo de início</string>
 	<string name="vezdo">Vez do </string>
+	<string name="title_activity_ultimos_jogos">Ultimos Jogos</string>
 </resources>

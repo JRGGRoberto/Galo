@@ -1,8 +1,12 @@
 package com.example.galo;
 
+
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
+import android.preference.PreferenceManager;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,17 +18,23 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
 	static char[] tab = new char[9];
-	static char simbolocorrente = 'X';
+	static char simbolocorrente;
+	static char simboloInicio;
+	static String player1 = "-";
+	static String player2 = "-";
 	boolean jogoterminado = false;
 	static int jogadas = -1;
 	static int TAMANHO = 3;
 	static int win = 0;
+	
 
 	public static void inicializacaoTabuleiro() {
 		jogadas = 0;
 		for (int pos = 0; pos < tab.length; pos++) {
 			tab[pos] = ' ';
 		}
+		simbolocorrente = simboloInicio;
+		troca();
 	}
 
 	public static boolean jogoAcabado() {
@@ -125,6 +135,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				inicializacaoTabuleiro();
+				
 				for (int i = 0; i < tab.length; i++) {
 					final int j = i;
 					btns[j].setImageResource(R.drawable.vazio);
@@ -193,6 +204,11 @@ public class MainActivity extends Activity {
 			intent.setClass(MainActivity.this, SettingsActivity.class);
 			startActivity(intent);
 			return true;
+			
+		case R.id.ultimosjogos:
+			intent.setClass(MainActivity.this, UltimosJogosActivity.class);
+			startActivity(intent);
+			return true;
 
 		default:
 			return super.onOptionsItemSelected(item);
@@ -226,6 +242,17 @@ public class MainActivity extends Activity {
 		final Toast toastWin = Toast.makeText(getApplicationContext(), turnof+ simbolocorrente, Toast.LENGTH_LONG);
 		toastWin.setGravity(Gravity.TOP, Gravity.CENTER_HORIZONTAL, 500);
 		toastWin.show();
+	}
+	
+	@Override
+	public void onStart(){
+		super.onStart();
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+
+		player1 = pref.getString("play1AAA", "defaultValue");
+		player2 = pref.getString("play2AAA", "defaultValue");
+		simboloInicio = pref.getString("oplista", "defaultValue").charAt(0);
+	
 	}
 
 }

@@ -25,6 +25,11 @@
         android:title="@string/menu_regras"/>
     
   
-    
+    <item
+        android:id="@+id/ultimosjogos"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/ic_action_view_as_list"
+        android:title="@string/title_activity_ultimos_jogos"/>
 
 </menu>
