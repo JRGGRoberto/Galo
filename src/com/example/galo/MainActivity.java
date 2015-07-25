@@ -1,6 +1,8 @@
 package com.example.galo;
 
 
+import java.util.Date;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,6 +28,8 @@ public class MainActivity extends Activity {
 	static int jogadas = -1;
 	static int TAMANHO = 3;
 	static int win = 0;
+	
+	Basedados bd;
 	
 
 	public static void inicializacaoTabuleiro() {
@@ -109,6 +113,8 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		bd = new Basedados(this);
 
 		final ImageView[] btns = { (ImageView) findViewById(R.id.b11),
 				(ImageView) findViewById(R.id.b12),
@@ -160,12 +166,13 @@ public class MainActivity extends Activity {
 						}
 
 						if (jogoAcabado()) {
-							final Toast toastWin = Toast.makeText(
-									getApplicationContext(), whowin + " " + simbolocorrente,Toast.LENGTH_LONG);
+							final Toast toastWin = Toast.makeText(getApplicationContext(), whowin + " " + simbolocorrente,Toast.LENGTH_LONG);
 							toastWin.setGravity(Gravity.TOP,Gravity.CENTER_HORIZONTAL, 500);
 							toastWin.show();
+							bd.consultaEscrita("insert into jogos(tresultado, nome_imagem,tempo) values ('Vitoria de', '"+ simbolocorrente +"', " + (new Date()).getTime() +")");
 						} else if (jogadas > 8) {
 							toastFimJogo.show();
+							bd.consultaEscrita("insert into jogos(tresultado, nome_imagem,tempo) values ('Empate ', 'vazio', " + (new Date()).getTime() +")");
 						}
 					} else {
 						// toastjogInvalida.show();
