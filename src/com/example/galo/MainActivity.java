@@ -1,6 +1,5 @@
 package com.example.galo;
 
-
 import java.util.Date;
 
 import android.app.Activity;
@@ -9,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,9 +28,7 @@ public class MainActivity extends Activity {
 	static int jogadas = -1;
 	static int TAMANHO = 3;
 	static int win = 0;
-	
 	Basedados bd;
-	
 
 	public static void inicializacaoTabuleiro() {
 		jogadas = 0;
@@ -113,7 +111,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		bd = new Basedados(this);
 
 		final ImageView[] btns = { (ImageView) findViewById(R.id.b11),
@@ -129,7 +127,8 @@ public class MainActivity extends Activity {
 		final String whowin = getResources().getString(R.string.whowin);
 		final String draw = getResources().getString(R.string.draw);
 
-		final Toast toastFimJogo = Toast.makeText(getApplicationContext(),draw, Toast.LENGTH_SHORT);
+		final Toast toastFimJogo = Toast.makeText(getApplicationContext(),
+				draw, Toast.LENGTH_SHORT);
 		toastFimJogo.setGravity(Gravity.TOP, Gravity.CENTER_HORIZONTAL, 500);
 
 		/**
@@ -141,7 +140,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				inicializacaoTabuleiro();
-				
+
 				for (int i = 0; i < tab.length; i++) {
 					final int j = i;
 					btns[j].setImageResource(R.drawable.vazio);
@@ -149,7 +148,6 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		
 		/**
 		 * Captura jogadas
 		 */
@@ -166,17 +164,22 @@ public class MainActivity extends Activity {
 						}
 
 						if (jogoAcabado()) {
-							final Toast toastWin = Toast.makeText(getApplicationContext(), whowin + " " + simbolocorrente,Toast.LENGTH_LONG);
-							toastWin.setGravity(Gravity.TOP,Gravity.CENTER_HORIZONTAL, 500);
+							final Toast toastWin = Toast.makeText(getApplicationContext(), whowin + " "+ simbolocorrente, Toast.LENGTH_LONG);
+							toastWin.setGravity(Gravity.TOP, Gravity.CENTER_HORIZONTAL, 500);
 							toastWin.show();
-							bd.consultaEscrita("insert into jogos(tresultado, nome_imagem,tempo) values ('Vitoria de', '"+ simbolocorrente +"', " + (new Date()).getTime() +")");
+							String abc = "insert into jogos(tresultado, nome_imagem, tempo, jogador1, jogador2, simpinicial) values "
+									+ "('Vitoria de', '"+ simbolocorrente + "', " + (new Date()).getTime() + ", '"+player1 +"', '"+player2 + "', '"+simboloInicio +"')";
+							
+						bd.consultaEscrita(abc);
+						
+						Log.d("Insert", abc);
+
 						} else if (jogadas > 8) {
 							toastFimJogo.show();
-							bd.consultaEscrita("insert into jogos(tresultado, nome_imagem,tempo) values ('Empate ', 'vazio', " + (new Date()).getTime() +")");
+							bd.consultaEscrita("insert into jogos(tresultado, nome_imagem, tempo, jogador1, jogador2, simpinicial) values "
+									+ "('Empate ', 'vazio', "                    + (new Date()).getTime() + ", '"+player1+"', '"+ player2 + "', ' "+ simboloInicio +"')");
 						}
-					} else {
-						// toastjogInvalida.show();
-					}
+					} // else toastjogInvalida.show();
 				}
 			});
 		}
@@ -185,16 +188,12 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		Intent intent = new Intent();
 		switch (item.getItemId()) {
 		case R.id.menu_regras:
@@ -211,9 +210,9 @@ public class MainActivity extends Activity {
 			intent.setClass(MainActivity.this, SettingsActivity.class);
 			startActivity(intent);
 			return true;
-			
+
 		case R.id.ultimosjogos:
-			intent.setClass(MainActivity.this, UltimosJogosActivity.class);
+			intent.setClass(MainActivity.this, LastsGamesAct.class);
 			startActivity(intent);
 			return true;
 
@@ -246,20 +245,21 @@ public class MainActivity extends Activity {
 		}
 		simbolocorrente = savedInstanceState.getChar("simbolocorrente");
 		String turnof = getResources().getString(R.string.vezdo);
-		final Toast toastWin = Toast.makeText(getApplicationContext(), turnof+ simbolocorrente, Toast.LENGTH_LONG);
+		final Toast toastWin = Toast.makeText(getApplicationContext(), turnof + simbolocorrente, Toast.LENGTH_LONG);
 		toastWin.setGravity(Gravity.TOP, Gravity.CENTER_HORIZONTAL, 500);
 		toastWin.show();
 	}
-	
+
 	@Override
-	public void onStart(){
+	public void onStart() {
 		super.onStart();
-		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+		SharedPreferences pref = PreferenceManager
+				.getDefaultSharedPreferences(this);
 
 		player1 = pref.getString("play1AAA", "defaultValue");
 		player2 = pref.getString("play2AAA", "defaultValue");
 		simboloInicio = pref.getString("oplista", "defaultValue").charAt(0);
-	
+
 	}
 
 }

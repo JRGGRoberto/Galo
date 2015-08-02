@@ -30,6 +30,6 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:icon="@drawable/ic_action_view_as_list"
-        android:title="@string/title_activity_ultimos_jogos"/>
+        android:title="@string/title_activity_lasts_games"/>
 
 </menu>

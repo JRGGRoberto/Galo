@@ -14,6 +14,7 @@
     <string name="simbo">O simbol</string>
     <string name="simbinicial">Start symbol</string>
     <string name="vezdo">Turn of </string>
-    <string name="title_activity_ultimos_jogos">Lasts games</string>
+    <string name="title_activity_lasts_games">Lasts games</string>
+                  
 
 </resources>

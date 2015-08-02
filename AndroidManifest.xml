@@ -28,16 +28,19 @@
             android:label="@string/menu_regras"
             android:screenOrientation="portrait" >
         </activity>
-        
         <activity
             android:name=".SettingsActivity"
             android:screenOrientation="portrait" >
         </activity>
-        
         <activity
             android:name=".UltimosJogosActivity"
-            android:label="@string/title_activity_ultimos_jogos" 
-            android:screenOrientation="portrait">
+            android:label="@string/title_activity_ultimos_jogos"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".LastsGamesAct"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_lasts_games" >
         </activity>
     </application>
 

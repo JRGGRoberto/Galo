@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="lista_in">
+        <item>@string/simbx</item>
+        <item>@string/simbo</item>
+    </array>
+    
+    <array name="simb">
+        <item>X</item>
+        <item>O</item>
+    </array>
+</resources>

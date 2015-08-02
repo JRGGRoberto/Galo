@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <ListPreference
+        android:key="oplista"
+        android:title="@string/simbinicial"
+ 		android:entries="@array/lista_in"
+        android:entryValues="@array/simb"
+        android:summary=""
+        android:defaultValue="X"
+        />
+
+    <EditTextPreference 
+        android:key="play1AAA"
+        android:title="@string/play1"
+        android:summary="" 
+        android:defaultValue="P1"/>
+
+    
+    <EditTextPreference 
+        android:key="play2AAA"
+        android:title="@string/play2"
+        android:summary="" 
+        android:defaultValue="P2"/>
+    
+ 
+</PreferenceScreen>
