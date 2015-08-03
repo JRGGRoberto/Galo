@@ -20,7 +20,7 @@ public class Basedados {
 		@Override
 		public void onCreate(SQLiteDatabase db) {
 			StringBuffer createTable = new StringBuffer("");
-			createTable.append("create table if not exists jogos( ");
+			createTable.append("create table jogos( ");
 			createTable.append("_id INTEGER PRIMARY KEY, ");
 			createTable.append("tresultado varchar(50), ");
 			createTable.append("nome_imagem varchar(5), ");
