@@ -11,11 +11,6 @@ Exemplo do Jogo da Velha para Android.
 
 (a) Emulados via VM [Genymotion](https://www.genymotion.com)
 
-https://pt.linkedin.com/in/jrobertogoes
-
-jrggroberto@gmail.com
-
-
 ### A melhorar
 
 1. onSaveInstanceState  - a validar
@@ -52,3 +47,9 @@ public class Arrays {
 		}
 	}
 }
+
+
+
+### JRGG Roberto :sailboat:<br>
+https://pt.linkedin.com/in/jrobertogoes <br>
+:e-mail: jrggroberto@gmail.com
